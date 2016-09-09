@@ -1,9 +1,9 @@
 package com.coveros.training.automation.selenium.pom;
 
-import com.coveros.training.automation.selenium.SeleniumMobileHelper;
-import com.coveros.training.automation.selenium.SeleniumMobileHelper.Locator;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+import com.coveros.training.automation.selenium.SeleniumMobileHelper.Locator;
 
 /**
  * Page Object representing the dialog that appears when an item is removed from
@@ -14,15 +14,20 @@ import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
  */
 public final class ConfirmRemoveItemDialog extends TargetWebsitePageObject {
 
+	@FindBy(xpath = "//div[2]/div/div[2]/button")
+	private WebElement removeButton;
+
 	@Override
 	protected boolean checkInitialPageState() {
-//		try {
-//			getSelenium().throwIfTextNotFoundInElement(Locator.XPATH, "//div[@id='basicModal']/div[2]/div/div/h2",
-//					"remove this item from your cart?", "Confirm Remove Item Dialog did not appear properly");
-//		} catch (PageLoadException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// try {
+		// getSelenium().throwIfTextNotFoundInElement(Locator.XPATH,
+		// "//div[@id='basicModal']/div[2]/div/div/h2",
+		// "remove this item from your cart?", "Confirm Remove Item Dialog did
+		// not appear properly");
+		// } catch (PageLoadException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		return super.checkInitialPageState();
 	}
 
@@ -35,7 +40,7 @@ public final class ConfirmRemoveItemDialog extends TargetWebsitePageObject {
 	}
 
 	public EmptyCartPage clickRemoveButton() throws PageLoadException {
-		getSelenium().tapElement(Locator.XPATH, "//div[2]/div/div[2]/button");
+		removeButton.click();
 		return factory.newPage(EmptyCartPage.class);
 	}
 }

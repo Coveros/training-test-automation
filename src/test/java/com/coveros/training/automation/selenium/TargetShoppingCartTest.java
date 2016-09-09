@@ -141,33 +141,27 @@ public abstract class TargetShoppingCartTest {
 	 * @throws Exception
 	 */
 	public void testTargetMobileThreeSpeakersNew() throws Exception {
-		try {
 
-			SearchResultsPage searchResultsPage = homePage.searchFor(speakersProductType);
+		SearchResultsPage searchResultsPage = homePage.searchFor(speakersProductType);
 
-			ProductDetailsPage productDetailsPage = searchResultsPage.selectProduct(speakersProductName);
-			assertTrue(searchResultsPage.getPageTitle().startsWith(speakersProductName));
+		ProductDetailsPage productDetailsPage = searchResultsPage.selectProduct(speakersProductName);
+		assertTrue(searchResultsPage.getPageTitle().startsWith(speakersProductName));
 
-			ShoppingCartConfirmDialog cartConfirmDialog = productDetailsPage.addQuantityToCart(itemCount);
-			ShoppingCartPage cartPage = cartConfirmDialog.clickViewCartAndCheckOut();
+		ShoppingCartConfirmDialog cartConfirmDialog = productDetailsPage.addQuantityToCart(itemCount);
+		ShoppingCartPage cartPage = cartConfirmDialog.clickViewCartAndCheckOut();
 
-			int actualCountInCart = cartPage.getQuantityInCart(speakersProductName);
-			String cartPageSummaryText = cartPage.getCartSummaryText();
+		int actualCountInCart = cartPage.getQuantityInCart(speakersProductName);
+		String cartPageSummaryText = cartPage.getCartSummaryText();
 
-			assertEquals(itemCount, actualCountInCart);
-			assertNotNull(cartPageSummaryText);
-			assertTrue(cartPageSummaryText.startsWith("cart total:"));
+		assertEquals(itemCount, actualCountInCart);
+		assertNotNull(cartPageSummaryText);
+		assertTrue(cartPageSummaryText.startsWith("cart total:"));
 
-			ConfirmRemoveItemDialog removeItemDialog = cartPage.removeItemFromCart(speakersProductName);
-			EmptyCartPage emptyCartPage = removeItemDialog.clickRemoveButton();
+		ConfirmRemoveItemDialog removeItemDialog = cartPage.removeItemFromCart(speakersProductName);
+		EmptyCartPage emptyCartPage = removeItemDialog.clickRemoveButton();
 
-			assertEquals("your cart is empty", emptyCartPage.getEmptyCartMessageText());
+		assertEquals("your cart is empty", emptyCartPage.getEmptyCartMessageText());
 
-		} catch (PageLoadException ple) {
-			// If a page fails to load as it should then this exception will be
-			// thrown and we fail the test.
-			failTest(ple.getMessage());
-		}
 	}
 
 	@After

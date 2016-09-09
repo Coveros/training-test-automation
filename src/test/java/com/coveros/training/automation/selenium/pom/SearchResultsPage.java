@@ -22,6 +22,9 @@ public class SearchResultsPage extends TargetWebsiteSearchablePage {
 		return factory.newPage(ProductDetailsPage.class);
 	}
 
+	public String getSearchTitle () {
+		return searchTitle.getText();
+	}
 	/**
 	 * 
 	 * @param title
