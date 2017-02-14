@@ -9,6 +9,7 @@ import com.coveros.training.automation.cucumber.books.Book;
 import com.coveros.training.automation.cucumber.books.Library;
 
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -19,17 +20,28 @@ public class LibraryStepDefinitions {
 
 	private List<Book> searchResult;
 
+	@Before
+	public void setupScenarios() {
+		System.out.println("Initializing library");
+		library = new Library();
+	}
+
+	@Given("^the list of books in the library$")
+	public void addBooksToLibrary(List<Book> books) {
+		for (Book book : books) {
+			library.addBook(book);
+		}
+	}
+
 	@Given("^there is a book titled '(.*)' written by '(.*)' published in (\\d+)$")
 	public void addBookToLibrary(String title, String author, int yearPublished) throws Throwable {
-		if (library == null) {
-			library = new Library();
-		}
 		library.addBook(new Book(title, author, yearPublished));
 	}
 
 	@When("^I search for books published before (\\d+)$")
 	public void searchBeforeYear(int endDate) throws Throwable {
 		searchResult = new ArrayList<>(library.searchByPublishDate(0, endDate));
+
 	}
 
 	@When("^I search for books published after (\\d+)$")
@@ -53,6 +65,7 @@ public class LibraryStepDefinitions {
 	 */
 	@After
 	public final void afterScenario() {
+		System.out.println("Cleaning up scenario");
 		searchResult = null;
 		library = null;
 	}

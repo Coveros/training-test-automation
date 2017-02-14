@@ -6,7 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/cucumber/features" })
-public class LibraryTest {
+@CucumberOptions(tags={"@datatable"}, plugin = { "html:target/cucumber-html-report" }, features = { "src/test/resources/cucumber/features" })
+public final class LibraryTest {
 
 }
