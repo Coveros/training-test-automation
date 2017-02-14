@@ -10,7 +10,7 @@ public final class Book {
 
 	private String title;
 	private String author;
-	private int yearPublished;
+	private int published;
 
 	/**
 	 * Create a new book
@@ -26,7 +26,7 @@ public final class Book {
 		super();
 		this.title = title;
 		this.author = author;
-		this.yearPublished = yearPublished;
+		this.published = yearPublished;
 	}
 
 	/**
@@ -50,7 +50,7 @@ public final class Book {
 	 * @return the year in which the book was published
 	 */
 	public int getPublished() {
-		return yearPublished;
+		return published;
 	}
 
 }
